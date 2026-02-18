@@ -1,11 +1,13 @@
 import qrcode
 import cv2 
 from pyzbar.pyzbar import decode
+import os
 
  # qr code generator 
 url = input("Enter the URL: ").strip()
 
-file_path = "C:\\Users\\Vikash_Choudhary\\Desktop\\qrcode.png"
+file_path = os.path.join(os.getcwd(), "qrcode.png")   # To this runs on ANY computer
+
 
 qr = qrcode.QRCode()
 qr.add_data(url)
@@ -16,10 +18,10 @@ print("qr code is generated ")
 
  # qr code reader
 
-choice = input("Do you want to scan a QR code now? (yes/no): ").lower()
+choice = input("Do you want to scan a QR code now? (yes/no):").lower()
 
 if choice == "yes":
-    cap = cv2.VideoCapture(0)  # Open camera
+    cap = cv2.VideoCapture(0)  # this Open camera
 
     print("Scanning... Press 'q' to quit.")
 
