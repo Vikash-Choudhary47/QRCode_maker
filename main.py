@@ -1,6 +1,5 @@
 import qrcode
 import cv2 
-from pyzbar.pyzbar import decode
 import os
 
  # qr code generator 
@@ -22,11 +21,15 @@ choice = input("Do you want to scan a QR code now? (yes/no):").lower()
 
 if choice == "yes":
     cap = cv2.VideoCapture(0)  # this Open camera
+    detector = cv2.QRCodeDetector()
+    last_scanned = ""
 
     print("Scanning... Press 'q' to quit.")
 
     while True:
         ret, frame = cap.read()
+        if not ret:
+            break
 
         for qr_code in decode(frame):
             data = qr_code.data.decode("utf-8")
